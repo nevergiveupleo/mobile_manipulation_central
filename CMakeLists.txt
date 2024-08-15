@@ -11,7 +11,7 @@ find_package(catkin REQUIRED COMPONENTS
   pybind11_catkin
 )
 
-find_package(Eigen3 3.3 REQUIRED NO_MODULE)
+find_package(Eigen3 REQUIRED)
 find_package(pinocchio REQUIRED)
 
 ###################################
@@ -27,7 +27,7 @@ catkin_package(
    INCLUDE_DIRS include
 #  LIBRARIES mobile_manipulation_central
 #  CATKIN_DEPENDS other_catkin_pkg
-   DEPENDS Eigen3 pinocchio
+   DEPENDS EIGEN3 pinocchio
 )
 
 # catkin_install_python(PROGRAMS
@@ -46,7 +46,7 @@ set(FLAGS ${pinocchio_CFLAGS_OTHER})
 include_directories(
  include
  ${catkin_INCLUDE_DIRS}
- ${EIGEN3_INCLUDE_DIRS}
+ ${EIGEN3_INCLUDE_DIR}
  ${pinocchio_INCLUDE_DIRS}
 )
 link_directories(
@@ -74,7 +74,7 @@ target_link_libraries(projectile_vicon_estimator_node
 add_executable(kinematics_example src/kinematics_example.cpp)
 target_link_libraries(kinematics_example
   ${catkin_LIBRARIES}
-  ${pinocchio_LIBRARIES}
+  pinocchio::pinocchio
 )
 
 #############
